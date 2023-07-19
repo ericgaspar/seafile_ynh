@@ -1,15 +1,15 @@
 [Unit]
-Description=Small description of the service
+Description=Seafile
+# add mysql.service or postgresql.service depending on your database to the line below
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
+ExecStart=__INSTALL_DIR__/seafile-server-latest/seafile.sh start
+ExecStop=__INSTALL_DIR__/seafile-server-latest/seafile.sh stop
+LimitNOFILE=infinity
 User=__APP__
 Group=__APP__
-WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/script
-StandardOutput=append:/var/log/__APP__/__APP__.log
-StandardError=inherit
 
 # Sandboxing options to harden security
 # Depending on specificities of your service/app, you may need to tweak these
